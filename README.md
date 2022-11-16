@@ -1,5 +1,5 @@
 # ezpass
-Project #1 - Password Generator with Login System (Beginner)
+Project #1 - Password Generator (Beginner)
 
 For demonstration/testing purposes, the current authorization code is "edoc" however I would change it if you plan on using it for personal use.
 
