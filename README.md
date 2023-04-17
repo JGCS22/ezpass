@@ -5,5 +5,3 @@ For demonstration/testing purposes, the current authorization code is "edoc" how
 
 I wanted to output to a pdf but it seemed quite annoying trying to convert a .txt file to a .pdf file
 
-I probably won't work on this anymore because there's more interesting projects
-Next is creating an ftp server with a raspberry pi.
