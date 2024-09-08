@@ -1,0 +1,12 @@
+Check if the file exists
+If the file exists then ask for the users credentials
+open the file and cross reference the username with the username in the system
+If not try again
+If the username passes, then check the master password
+Use the masterpassword with the salt to derive a key
+if the key decrypts the passwords then the password to access the account was correct
+
+If the file doesnt exist then ask for the username and password
+Create the file with the base template
+store the salt
+Have the user now log in
