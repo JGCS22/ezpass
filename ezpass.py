@@ -1,20 +1,5 @@
-import json
-import sys
-import string
-import secrets
-from tabulate import tabulate
-from getpass_asterisk.getpass_asterisk import getpass_asterisk
-from cryptography.fernet import Fernet
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-from cryptography.hazmat.primitives import hashes
-from cryptography.exceptions import InvalidSignature
-from cryptography.fernet import InvalidToken
-from cryptography.hazmat.backends import default_backend
-from base64 import urlsafe_b64encode
-import pandas as pd
-import os
-import base64
-#Test Commit
+from imports import *
+
 def decrypt(unique_key, encrypted_password_string):
     try:
         f = Fernet(unique_key)
@@ -24,11 +9,13 @@ def decrypt(unique_key, encrypted_password_string):
     except (InvalidSignature, InvalidToken):
         return False
 
+
 def encrypt(unique_key, decrypted_password_dict):
     f = Fernet(unique_key)
     decrypted_password_string = json.dumps(decrypted_password_dict)
     encrypted_password_dict = f.encrypt(decrypted_password_string.encode())
     return encrypted_password_dict
+
 
 def generate_profile():
     salt = os.urandom(16)
@@ -43,15 +30,18 @@ def generate_profile():
         {"SALT": salt_encoded},
         {comment: password}
     ]
+    
     unique_key = generate_key(salt, new_master_password)
     print_data(data_storage_template)
     append_data(unique_key, data_storage_template)
     return
 
+
 def generate_password():
     character_domain = string.ascii_letters + string.digits + string.punctuation
     password = ''.join(secrets.choice(character_domain) for _ in range(16))
     return password
+
 
 def generate_key(salt_onfile, master_password_attempt):
     kdf = PBKDF2HMAC (
@@ -72,6 +62,7 @@ def append_data(unique_key, list_of_dict):
         json.dump(list_of_dict, ds_file, indent=4)
     return
 
+
 def get_data():
     with open("data_storage.json", "r") as ds_file:
         list_of_dict = json.load(ds_file)
@@ -82,6 +73,7 @@ def print_data(list_of_dict):
     df = pd.DataFrame(list(list_of_dict[2].items()), columns=["Comment", "Password"])
     formatted_df = tabulate(df, headers="keys", tablefmt="grid", stralign="center", numalign="center", showindex=False)
     print(formatted_df)
+
 
 def main():
     print("\n\tE\tZ\tP\tA\tS\tS\n")
@@ -117,4 +109,5 @@ def main():
             generate_profile()
             sys.exit()
 
-main()
+if __name__ == "__main__":
+    main()
