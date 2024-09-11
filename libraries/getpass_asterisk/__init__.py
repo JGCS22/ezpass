@@ -1,1 +1,0 @@
-name = 'getpass_asterisk'
