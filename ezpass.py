@@ -1,4 +1,8 @@
+import os
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__), 'libraries'))
 from imports import *
+
 
 def decrypt(unique_key, encrypted_password_string):
     try:

@@ -1,0 +1,11 @@
+getpass_asterisk-1.0.1.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4
+getpass_asterisk-1.0.1.dist-info/LICENSE,sha256=aEyE2gX4e2NpL00fcjvqQiMxmzrceXE6gVicArDVRlc,3613
+getpass_asterisk-1.0.1.dist-info/METADATA,sha256=i5_rMEMUTwEHdHPzXD1eNT2V4XPF0CE7Xpf5IX6uhGo,1542
+getpass_asterisk-1.0.1.dist-info/RECORD,,
+getpass_asterisk-1.0.1.dist-info/REQUESTED,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+getpass_asterisk-1.0.1.dist-info/WHEEL,sha256=G16H4A3IeoQmnOrYV4ueZGKSjhipXx8zc8nu9FGlvMA,92
+getpass_asterisk-1.0.1.dist-info/top_level.txt,sha256=TK6OB5uznXLm4pPjHioZ5xP7fCYgZD7LK46HU8X1lzU,17
+getpass_asterisk/__init__.py,sha256=vWoMW-oOjLcfbtmCO6MrtteY3VhQBjYwuDMoXvqOSt0,26
+getpass_asterisk/__pycache__/__init__.cpython-312.pyc,,
+getpass_asterisk/__pycache__/getpass_asterisk.cpython-312.pyc,,
+getpass_asterisk/getpass_asterisk.py,sha256=RHlf6kFXQUbTYOB-kBogMfN_Bnla3FyKcfhwErHwU5k,7968
