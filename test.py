@@ -1,53 +1,51 @@
+from imports import *
+
 import curses
 
-
-def print_menu(stdscr, selected_row_idx, menu):
-    stdscr.clear()
-    h, w = stdscr.getmaxyx()
-    for idx, row in enumerate(menu):
-        x = w//2 - len(row)//2
-        y = h//2 - len(menu)//2 + idx
-        if idx == selected_row_idx:
-            stdscr.attron(curses.color_pair(1))
-            stdscr.addstr(y, x, row)
-            stdscr.attroff(curses.color_pair(1))
-        else:
-            stdscr.addstr(y, x, row)
-    stdscr.refresh()
-
 def main(stdscr):
-    # Turn off cursor blinking
-    menu = ["LOGIN", "RESET", "EXIT"]
-    curses.curs_set(0)
+    curses.curs_set(1)  # Show the cursor for text input
+    stdscr.clear()
 
-    # Enable arrow keys and mouse events
-    stdscr.keypad(1)
-
-    # Set up color pair for selected menu item
-    curses.start_color()
-    curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_WHITE)
-
+    # Display menu options
+    menu = ["Option 1", "Option 2", "Option 3", "Enter text"]
     current_row = 0
-    print_menu(stdscr, current_row, menu)
+
+    # Function to display the menu
+    def print_menu(stdscr, selected_row):
+        stdscr.clear()
+        for idx, row in enumerate(menu):
+            if idx == selected_row:
+                stdscr.addstr(idx, 0, row, curses.A_REVERSE)  # Highlight current row
+            else:
+                stdscr.addstr(idx, 0, row)
+        stdscr.refresh()
+
+    print_menu(stdscr, current_row)
 
     while True:
         key = stdscr.getch()
 
-        # Handle key input
+        # Navigate the menu
         if key == curses.KEY_UP and current_row > 0:
             current_row -= 1
         elif key == curses.KEY_DOWN and current_row < len(menu) - 1:
             current_row += 1
-        elif key == curses.KEY_ENTER or key in [10, 13]:
-            if menu[current_row] == "LOGIN":
-                menu.clear()
-                menu = ["USERNAME", "PASSWORD"]
-            if current_row == len(menu) - 1:  # Exit option
-                break
-            stdscr.addstr(0, 0, f"You selected {menu[current_row]}")
-            stdscr.refresh()
-        
-        print_menu(stdscr, current_row, menu)
 
-# Start curses application
-curses.wrapper(main)
+        print_menu(stdscr, current_row)
+
+        # If user presses Enter
+        if key == curses.KEY_ENTER or key in [10, 13]:
+            if current_row == len(menu) - 1:  # If "Enter text" is selected
+                stdscr.addstr(5, 0, "USERNAME: ")
+                curses.echo()  # Enable echoing of characters to screen
+                user_input = stdscr.getstr(len(menu) + 1, 10, 50)  # Get up to 20 characters
+                stdscr.addstr(len(menu) + 2, 0, f"Your input: {user_input.decode('utf-8')}")
+                stdscr.refresh()
+                stdscr.getch()  # Wait for user to see the input before exiting
+                break
+            else:
+                stdscr.addstr(len(menu), 0, f"You selected: {menu[current_row]}")
+                stdscr.refresh()
+                stdscr.getch()  # Pause to see the result
+if __name__ == "__main__":
+    curses.wrapper(main)
